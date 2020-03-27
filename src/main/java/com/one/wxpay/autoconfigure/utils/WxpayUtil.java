@@ -31,14 +31,6 @@ public class WxpayUtil {
 
         String result = null;
 
-        URI uri = null;
-
-        try {
-            uri = new URIBuilder().setScheme("https").setHost("api.mch.weixin.qq.com").setPort(443).setPath("/pay/unifiedorder").build();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
         httpPost.setHeader("Content-Type","text/xml;charset=UTF-8");
         if(!StringUtils.isEmpty(params)) {
             StringEntity stringEntity = new StringEntity(params,StandardCharsets.UTF_8);
