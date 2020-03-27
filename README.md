@@ -20,7 +20,7 @@
    //示例子
    spring:
      wxpay:
-     	//微信提供的appId
+       //微信提供的appId
        app-id: ******
        //微信商户平台ID
        mch-id: ******
@@ -47,7 +47,8 @@
    * spbill_create_ip：发起支付的IP地址
    * notify_url trade_type：微信支付回调地址
    * trade_type：交易类型(由于一个后台系统可能提供多端app支付使用,故此参数并没加入配置文件中)
+   * openid：当trade_type为JSAPI时为必传
    */
    ```
-
+   
    <span style = "color: red">注：</span>[微信支付详细参数链接](https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=9_1)
