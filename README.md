@@ -70,7 +70,7 @@
 
         params.put("spbill_create_ip",request.getRemoteAddr());
 
-        params.put("notify_url","http://106.12.205.105/callback");
+        params.put("notify_url","你的回调地址 请输入全域名");
 
         params.put("trade_type","NATIVE");
 
