@@ -51,7 +51,7 @@
    */
    ```
    ```java
-   // 应用实例
+   // 使用示例
    @RestController
    public class test() {
       @Autowired
