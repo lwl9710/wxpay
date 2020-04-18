@@ -53,7 +53,7 @@
    ```java
    // 使用示例
    @RestController
-   public class test() {
+   public class Test() {
       @Autowired
       WxpayService wxpayService;
    
