@@ -34,7 +34,7 @@
    @Autowired
    private WxpayService wxpayService;
    ```
-
+   
 6. 调用方法并传入相关参数发起支付
 
    ```java
@@ -49,6 +49,34 @@
    * trade_type：交易类型(由于一个后台系统可能提供多端app支付使用,故此参数并没加入配置文件中)
    * openid：当trade_type为JSAPI时为必传
    */
+   ```
+   ```java
+   // 应用实例
+   @RestController
+   public class test() {
+      @Autowired
+      WxpayService wxpayService;
+   
+      @GetMapping("/pay") 
+      public Map<String,String> pay{
+         Map<String,String> params = new HashMap<>();
+
+
+        params.put("body","测试-商品");
+
+        params.put("out_trade_no", UUID.randomUUID().toString().replace("-","").toUpperCase());
+
+        params.put("total_fee","100");
+
+        params.put("spbill_create_ip",request.getRemoteAddr());
+
+        params.put("notify_url","http://106.12.205.105/callback");
+
+        params.put("trade_type","NATIVE");
+
+        return wxpayService.sendPay(params);
+      }
+   }
    ```
    
    <span style = "color: red">注：</span>[微信支付详细参数链接](https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=9_1)
