@@ -5,11 +5,11 @@ import com.one.wxpay.autoconfigure.utils.ResultUtil;
 import com.one.wxpay.autoconfigure.utils.WxpayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class WxpayService {
-
     @Autowired
     private WxpayProperties wxpayProperties;
 
@@ -32,7 +32,10 @@ public class WxpayService {
         map.put("sign",WxpayUtil.generateSign(map));
         //删除不必要参数key
         map.remove("key");
-
-        return ResultUtil.doXMLParse(WxpayUtil.doPost(WxpayUtil.generateXMLString(map)));
+        Map<String, String> payData = ResultUtil.doXMLParse(WxpayUtil.doPost(WxpayUtil.generateXMLString(map)));
+        payData.put("timeStamp", String.valueOf(System.currentTimeMillis() / 1000));
+        payData = WxpayUtil.createPaySign(payData, wxpayProperties.getMchKey());
+        return payData;
     }
+
 }

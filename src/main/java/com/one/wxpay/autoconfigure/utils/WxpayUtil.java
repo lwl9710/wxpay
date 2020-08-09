@@ -7,6 +7,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -152,5 +153,18 @@ public class WxpayUtil {
         sb.append("key=").append(data.get("key"));
 
         return toMD5String(sb.toString());
+    }
+
+    public static Map<String, String> createPaySign(Map<String, String> params, String key) {
+        StringBuffer stringBuffer = new StringBuffer();
+
+        stringBuffer.append("appId=" + params.get("appid"));
+        stringBuffer.append("&nonceStr=" + params.get("nonce_str"));
+        stringBuffer.append("&package=prepay_id=" + params.get("prepay_id"));
+        stringBuffer.append("&signType=MD5");
+        stringBuffer.append("&timeStamp=" + params.get("timeStamp"));
+        stringBuffer.append("&key=" + key);
+        params.put("paySign", DigestUtils.md5DigestAsHex(stringBuffer.toString().getBytes(StandardCharsets.UTF_8)).toUpperCase());
+        return params;
     }
 }
